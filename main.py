@@ -228,7 +228,7 @@ def main():
         else:
             for url in urls():
                 save(get_data_pages(url), flag="a")
-        print("[ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'), end=" ")
+        print("[ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'))
     except Exception as ex:
         print(f"[ - ] {datetime.now().strftime('%d-%m-%Y %H:%M:%S')} {ex}")
     # print(f"timelap: {datetime.now() - start}")
