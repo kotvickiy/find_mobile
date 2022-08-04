@@ -133,7 +133,7 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
             elif len(lst_chars) == 3 and "redmi" in lst_chars and "note" in lst_chars:
                 pattern = fr"(\s|^){char_one}\s?{char_two}\s{num_one}\s?({char_three}(\W|$))"
             elif len(lst_chars) == 3 and "mi" in lst_chars:
-                pattern = fr"(\s|^)({char_one}\s?)?{char_two}?\s?{num_one}\s?{char_two}?\s{char_three}"
+                pattern = fr"(\s|^)({char_one}\s?)?{char_two}?\s?(?<!note |edmi ){num_one}\s?{char_two}?\s{char_three}"
             elif len(lst_chars) == 2 and "redmi" in lst_chars and "note" in lst_chars:
                 pattern = fr"(\s|^){char_one}\s{char_two}\s?{num_one}(\s|$)?(?!(\d|[ ][t](\W|$)|[t](\W|$)))"
             elif len(lst_chars) == 2 and "redmi" in lst_chars:
@@ -161,7 +161,7 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
         # print(f"Ныряем: {avito_title} ==> ", end="")
         html = get_html(link)
         soup = BS(html, "lxml")
-        new_title = soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
+        new_title = "⮭" + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
         # print(new_title)
         gnaw_xiaomi(new_title, avito_price, res, link, flag=False)
 
