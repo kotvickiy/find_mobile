@@ -126,10 +126,14 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
 
         if lst_nums:
             num_one = lst_nums[0]
-            if len(lst_chars) == 3 and "redmi" in lst_chars and "note" in lst_chars:
+            if len(lst_chars) == 3 and "poco" in lst_chars:
+                pattern = fr"(\s|^){char_one}\s{char_two}\s?{num_one}\s?{char_three}"
+            elif len(lst_chars) == 2 and "poco" in lst_chars:
+                pattern = fr"(\s|^){char_one}(phone)?\s{char_two}\s?{num_one}(?!(\s?(nfc|pro|gt)))"
+            elif len(lst_chars) == 3 and "redmi" in lst_chars and "note" in lst_chars:
                 pattern = fr"(\s|^){char_one}\s?{char_two}\s{num_one}\s?({char_three}(\W|$))"
-            if len(lst_chars) == 3 and "mi" in lst_chars:
-                pattern = fr"(\s|^)({char_one}\s?)?{num_one}\s?{char_two}\s{char_three}"
+            elif len(lst_chars) == 3 and "mi" in lst_chars:
+                pattern = fr"(\s|^)({char_one}\s?)?{char_two}?\s?{num_one}\s?{char_two}?\s{char_three}"
             elif len(lst_chars) == 2 and "redmi" in lst_chars and "note" in lst_chars:
                 pattern = fr"(\s|^){char_one}\s{char_two}\s?{num_one}(\s|$)?(?!(\d|[ ][t](\W|$)|[t](\W|$)))"
             elif len(lst_chars) == 2 and "redmi" in lst_chars:
@@ -143,12 +147,13 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
         else:
             if len(lst_chars) == 2:
                 pattern = f"(\s|^)({char_one}\s)?{char_two}(\W|$)"
-            elif "poco" in lst_chars:
-                pattern = fr"poco"
+
+            
 
         if re.search(pattern, avito_title.lower()):
             lnk = True
             if avito_price <= standart_price and avito_price > min_price:
+                # print(pattern)
                 data = {'title': avito_title, 'price': str(avito_price), 'link': link}
                 res.append(data)
 
@@ -161,11 +166,12 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
         gnaw_xiaomi(new_title, avito_price, res, link, flag=False)
 
 
+
 def get_data(html):
     res = []
     soup = BS(html, 'lxml')
     brand = soup.title.text.split(" ")[4].strip().lower()
-    print(brand)
+    # print(brand)
     items = soup.find("div", {"data-marker": "catalog-serp"}).find_all('div', {"data-marker": "item"})
 
     for item in items:
