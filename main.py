@@ -220,7 +220,7 @@ def verify_news(url):
 
 
 def main():
-    start = datetime.now()
+    # start = datetime.now()
     try:
         if os.path.exists('./fm.csv'):
             for url in urls():
@@ -231,7 +231,7 @@ def main():
         print("[ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'), end=" ")
     except Exception as ex:
         print(f"[ - ] {datetime.now().strftime('%d-%m-%Y %H:%M:%S')} {ex}")
-    print(f"time lap: {datetime.now() - start}")
+    # print(f"timelap: {datetime.now() - start}")
 
 
 if __name__ == "__main__":
