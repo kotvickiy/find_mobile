@@ -197,7 +197,7 @@ def get_data(html):
 
 def get_data_pages(url):
     lst_data_pages = []
-    for i in range(1, 6):  # проверяем только 3 страницы
+    for i in range(1, 4):  # проверяем только 3 страницы
         link = f"{url}&p={i}"
         lst_data_pages.extend(get_data(get_html(link)))
     
