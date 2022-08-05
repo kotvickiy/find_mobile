@@ -99,7 +99,7 @@ def gnaw_samsung(avito_title, avito_price, res, link, flag=True):
     if not lnk and flag:
         html = get_html(link)
         soup = BS(html, "lxml")
-        new_title = "⮭" + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
+        new_title = "⮭ " + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
         gnaw_samsung(new_title, avito_price, res, link, flag=False)
 
 
@@ -141,7 +141,7 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
             elif len(lst_chars) == 1 and "redmi" in lst_chars:
                 pattern = fr"(\s|^){char_one}\s?{num_one}\s?(?!\d|\s?(a|c)(\W|$)|\s?t(\W|$))"
             elif len(lst_chars) == 2 and "mi" in lst_chars:
-                pattern = fr"(\s|^)({char_one}\s?)?{num_one}?\s?{char_two}({num_one})?(\W|$)(?!(\s?(lite|pro|i)))"
+                pattern = fr"(\s|^)(?<!note |edmi )({char_one}\s?)?{num_one}?\s?{char_two}({num_one})?(\W|$)(?!(\s?(lite|pro|i)))"
             elif len(lst_chars) <= 2:
                 pattern = fr"(\s|^)({char_one}\s?)?(?<!note |edmi ){num_one}\s?(?!\d|(\s?(lite|pro|i))|[t](\W|$)|[ ][t](\W|$))"
         else:
@@ -161,7 +161,7 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
         # print(f"Ныряем: {avito_title} ==> ", end="")
         html = get_html(link)
         soup = BS(html, "lxml")
-        new_title = "⮭" + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
+        new_title = "⮭ " + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
         # print(new_title)
         gnaw_xiaomi(new_title, avito_price, res, link, flag=False)
 
@@ -197,7 +197,7 @@ def get_data(html):
 
 def get_data_pages(url):
     lst_data_pages = []
-    for i in range(1, 4):  # проверяем только 3 страницы
+    for i in range(1, 6):  # проверяем только 3 страницы
         link = f"{url}&p={i}"
         lst_data_pages.extend(get_data(get_html(link)))
     
