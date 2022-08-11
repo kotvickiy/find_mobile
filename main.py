@@ -138,7 +138,7 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
             elif len(lst_chars) == 3 and "mi" in lst_chars:
                 pattern = fr"(\s|^)({char_one}\s?)?{char_two}?\s?(?<!note |edmi ){num_one}\s?{char_two}?\s{char_three}"
             elif len(lst_chars) == 2 and "redmi" in lst_chars and "note" in lst_chars:
-                pattern = fr"(\s|^){char_one}\s{char_two}\s?{num_one}(\s|$)?(?!(\d|[ ][t](\W|$)|[t](\W|$)))"
+                pattern = fr"(\s|^){char_one}\s{char_two}\s?{num_one}(\s|$)?(?!(\d|[ ][t](\W|$)|[t](\W|$)|(pro)|( pro)))"
             elif len(lst_chars) == 2 and "redmi" in lst_chars:
                 pattern = fr"(\s|^){char_one}\s?{num_one}\s?{char_two}(\W|$)"
             elif len(lst_chars) == 1 and "redmi" in lst_chars:
