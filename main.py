@@ -99,7 +99,10 @@ def gnaw_samsung(avito_title, avito_price, res, link, flag=True):
     if not lnk and flag:
         html = get_html(link)
         soup = BS(html, "lxml")
-        new_title = "⮭ " + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
+        try:
+            new_title = "⮭ " + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
+        except:
+            new_title = "⮭ "
         gnaw_samsung(new_title, avito_price, res, link, flag=False)
 
 
@@ -161,7 +164,10 @@ def gnaw_xiaomi(avito_title, avito_price, res, link, flag=True):
         # print(f"Ныряем: {avito_title} ==> ", end="")
         html = get_html(link)
         soup = BS(html, "lxml")
-        new_title = "⮭ " + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
+        try:
+            new_title = "⮭ " + soup.find("ul", class_="params-paramsList-2PiKQ").find_all("li")[2].text.split(":")[1].strip()
+        except:
+            new_title = "⮭ "
         # print(new_title)
         gnaw_xiaomi(new_title, avito_price, res, link, flag=False)
 
