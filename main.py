@@ -209,7 +209,7 @@ def verify_news(url):
     new_lst = get_data(get_html(url))
     freshs_lst = []
     for new in new_lst:
-        if new not in ref_lst:
+        if new not in ref_lst and new not in freshs_lst:
             freshs_lst.append(new)
     if freshs_lst:
         for i in freshs_lst:
