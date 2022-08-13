@@ -50,7 +50,8 @@ def get_html(url):
             # with open("index.html", "w") as file:
             #     file.write(response.text)
             return response.text
-        print("SELENIUM => [ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'))
+        # print(response.status_code)
+        print(response.status_code, "SELENIUM => [ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'))
         return get_html_lin_selen(url)
     elif "win" in sys.platform:
         return get_html_win_selen(url)
