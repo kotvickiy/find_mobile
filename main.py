@@ -16,10 +16,10 @@ from time import sleep
 from random import uniform
 from datetime import datetime
 
-from html_win_selen import get_html_win_selen
 from html_lin_selen import get_html_lin_selen
 from config import TOKEN, CHAT_ID
 from headers import headers
+from requests_tls import get_html_tls
 
 
 
@@ -44,17 +44,12 @@ def lst_old_result():
 
 def get_html(url):
     sleep(uniform(0.1, 0.5))  
-    if "lin" in sys.platform:
-        response = requests.get(url, headers=headers)
-        if response.ok:
-            # with open("index.html", "w") as file:
-            #     file.write(response.text)
-            return response.text
-        # print(response.status_code)
-        print(response.status_code, "SELENIUM => [ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'))
-        return get_html_lin_selen(url)
-    elif "win" in sys.platform:
-        return get_html_win_selen(url)
+    response = get_html_tls(url, headers=headers)
+    if not response.status_code == 200:
+        return response.text
+    print(response.status_code, "SELENIUM => [ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'))
+    return get_html_lin_selen(url)
+
 
 
 def gnaw_samsung(avito_title, avito_price, res, link, flag=True):
