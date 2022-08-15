@@ -45,7 +45,7 @@ def lst_old_result():
 def get_html(url):
     sleep(uniform(0.1, 0.5))  
     response = get_html_tls(url, headers=headers)
-    if not response.status_code == 200:
+    if response.status_code == 200:
         return response.text
     print(response.status_code, "SELENIUM => [ + ]", datetime.now().strftime('%d-%m-%Y %H:%M:%S'))
     return get_html_lin_selen(url)
